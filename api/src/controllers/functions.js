@@ -1,10 +1,8 @@
 const axios = require('axios')
-const Dog = require('../models/Dog')
-const Temperaments = require('../models/Temperaments')
+const { Dog, Temperaments } = require('../db')
+const { DB_API_KEY } = process.env;
 
-
-
-const apiDogs = async (name) => {
+const apiDogs = async () => {
   const apiUrl = await axios.get('https://api.thedogapi.com/v1/breeds')
   const apiInfo = apiUrl.data.map(dog => {
     let avgHeight = null
@@ -22,15 +20,14 @@ const apiDogs = async (name) => {
       avgWeight = (parseInt(varW[0]) + parseInt(varW[1])) / 2
     } else {
       avgWeight = parseInt(varW[0])
-    } 
+    }
     if (varLS.length > 1) {
       avgLifeSpan = (parseInt(varLS[0]) + parseInt(varLS[1])) / 2
     } else {
       avgLifeSpan = parseInt(varLS[0])
     }
-
     return {
-      id: dog.id,
+      id: dog.id.toString(),
       name: dog.name,
       average_height: Math.round(avgHeight),
       average_weight: Math.round(avgWeight),
@@ -38,26 +35,105 @@ const apiDogs = async (name) => {
       temperaments: dog.temperament
     }
   })
+  return apiInfo
+}
 
+const dbDogs = async () => {
+  let dbInfo = await Dog.findAll({
+    include: {
+      model: Temperaments,
+      attributes: ['name'],
+      through: {
+        attributes: [],
+      },
+    }
+  })
+  let dbdogs = dbInfo.map(dog => {
+    let temps = dog.temperaments.map(t => t.name).join(', ')
+    return {
+    id: dog.id,
+    name: dog.name,
+    average_height: dog.average_height,
+    average_weight: dog.average_weight,
+    average_lifeSpan: dog.average_lifeSpan,
+    temperaments: temps
+  }})
+
+  return dbdogs
+}
+
+const allDogs = async () => {
+  return (await apiDogs()).concat(await dbDogs())
+}
+
+const someDogs = async (name) => {
+  let allD = await allDogs()
   if (name) {
-    let dogs = apiInfo.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
+    let dogs = allD.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
     if (!dogs.length) {
       return `No existe ningun perro que se llame ${name}`
     }
     return dogs
   }
-  return apiInfo
+  return allD
 }
 
-
 const dogsById = async (id) => {
-  const dogs = await apiDogs();
+  const dogs = await allDogs();
   let dog = dogs.find(d => d.id === id)
   if (!dog) {
     return `No existe ningun perro con id numero ${id}`
   } else {
     return dog
   }
+}
+
+const createDog = async (id, name, average_height, average_weight, average_lifeSpan, temperaments) => {
+  await findDogTemperament()
+  if (!name) {
+    return 'falta agregar nombre, es un dato obligatorio!'
+  }
+  if (!average_height) {
+    return 'falta agregar altura, es un dato obligatorio!'
+  }
+  if (!average_weight) {
+    return 'falta agregar peso, es un dato obligatorio!'
+  }
+  const obj = {
+    id,
+    name,
+    average_height,
+    average_weight,
+    average_lifeSpan
+  }
+  
+  let newDog = await Dog.create(obj);
+  let toAddTemps = temperaments.split(', ')
+  toAddTemps.forEach(async (temp) => {
+    let dogTemp = await Temperaments.findAll({
+      where: { name: temp }
+    })
+    console.log('dogTemp', dogTemp)
+    newDog.addTemperament(dogTemp)
+  })
+  return newDog
+}
+
+const findDogTemperament = async () => {
+  const apiTemperament = await axios.get(`https://api.thedogapi.com/v1/breeds?apikey=${DB_API_KEY}`);
+  let temperament = apiTemperament.data.map(d => d.temperament ? d.temperament : '');
+  let splittedTemp = temperament.map(d => d.split(', '))
+
+
+  let setTemp = new Set(splittedTemp.flat()) // el set quita los repetidos y el flat los saca del array
+  for (element of setTemp) {
+    if (element) await Temperaments.findOrCreate({
+      where: { name: element }
+    })
+  }
+
+  let dbTemperament = await Temperaments.findAll();
+  return dbTemperament
 }
 
 // const dogsByName = async (name) => {
@@ -70,4 +146,6 @@ const dogsById = async (id) => {
 //   }
 // }
 
-module.exports = { apiDogs, dogsById }
+
+
+module.exports = { someDogs, dogsById, createDog, findDogTemperament }
