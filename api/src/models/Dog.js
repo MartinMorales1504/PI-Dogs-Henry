@@ -31,6 +31,11 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: true
     },
+    img: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: 'https://cdn.shopify.com/s/files/1/0093/8432/9313/articles/Blog_Tieraa_Canina_Huella_perro_1024x1024.jpg?v=1593022994'
+    },
     // evito crear las columnas default
   },
     { timestamps: false });

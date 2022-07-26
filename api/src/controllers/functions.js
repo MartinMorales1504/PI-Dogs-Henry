@@ -32,7 +32,9 @@ const apiDogs = async () => {
       average_height: Math.round(avgHeight),
       average_weight: Math.round(avgWeight),
       average_lifeSpan: Math.round(avgLifeSpan),
-      temperaments: dog.temperament
+      temperaments: dog.temperament,
+      img: dog.image.url,
+      createdInDataBase: false
     }
   })
   return apiInfo
@@ -56,7 +58,9 @@ const dbDogs = async () => {
     average_height: dog.average_height,
     average_weight: dog.average_weight,
     average_lifeSpan: dog.average_lifeSpan,
-    temperaments: temps
+    temperaments: temps,
+    img: dog.img,
+    createdInDataBase: dog.createdInDataBase
   }})
 
   return dbdogs
@@ -113,7 +117,6 @@ const createDog = async (id, name, average_height, average_weight, average_lifeS
     let dogTemp = await Temperaments.findAll({
       where: { name: temp }
     })
-    console.log('dogTemp', dogTemp)
     newDog.addTemperament(dogTemp)
   })
   return newDog
@@ -125,7 +128,7 @@ const findDogTemperament = async () => {
   let splittedTemp = temperament.map(d => d.split(', '))
 
 
-  let setTemp = new Set(splittedTemp.flat()) // el set quita los repetidos y el flat los saca del array
+  let setTemp = new Set(splittedTemp.flat()) // el set saca los repetidos y el flat los saca del array
   for (element of setTemp) {
     if (element) await Temperaments.findOrCreate({
       where: { name: element }
