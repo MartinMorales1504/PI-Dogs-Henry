@@ -1,0 +1,91 @@
+*{
+    margin: 0px;
+    margin-top: 9px
+}
+
+
+.navBar{
+    background-color: rgba(87, 99, 207, 0.281);
+    height: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content:flex-end;
+    justify-content:space-between;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.searchButton {
+    margin-right: 70%;
+    border: .1rem solid #FCA652;
+    backdrop-filter: blur(0.2rem);
+    border-radius: 2rem;
+    background-color: white;
+    width: 80px;
+    height: 25px;
+    color: #FCA652;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.9s; 
+}
+
+.searchButton:hover{
+    transform: translateY(-3%);
+    box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
+    transition: all 400ms ease;
+    color: white;
+} 
+
+.searchButton:hover{
+    background-color: #FCA652;
+}
+
+
+.createButton {
+    margin-top: -5px;
+    border: .1rem solid #FCA652;
+    backdrop-filter: blur(0.2rem);
+    border-radius: 2rem;
+    background-color: white;
+    width: 200px;
+    height: 25px;
+    color: #FCA652;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.9s;
+    
+}
+
+.createButton:hover{
+    transform: translateY(-3%);
+    box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
+    transition: all 400ms ease;
+    color: white;
+} 
+
+.createButton:hover{
+    background-color: #FCA652;
+}
+
+.input{
+    border: .1rem solid #FCA652;
+    border-radius: 2rem;
+    background-color: white;
+    margin-left: -20px;
+    height: 20px;
+    width: 200px;
+    color: #FCA652;
+}
+
+.input:hover{
+    transform: translateY(-3%);
+    box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
+    transition: all 400ms ease;
+    color: white;
+} 
+
+.input:hover{
+    background-color: #FCA652;
+}

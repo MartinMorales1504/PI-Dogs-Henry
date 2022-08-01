@@ -1,0 +1,97 @@
+/* https://i.pinimg.com/originals/f0/41/b3/f041b3116173a344df67ba726511a3d8.jpg  */
+.backImg {
+    background-image: url("https://i.pinimg.com/originals/f0/41/b3/f041b3116173a344df67ba726511a3d8.jpg");
+    margin-top: -18px;
+    width: 100%;
+    height: 130vh;
+    background-size: cover;
+
+}
+
+.formContainer {
+    position: absolute;
+    justify-content: left;
+    left: 11vw;
+    top: 20vh;
+    font-size: 45px;
+}
+
+
+.formContainer input {
+    font-size: 45px;
+    margin-left: 20px;
+    width: 500px;
+    height: 45px;
+    border-style: none;
+    background-color: rgba(127, 255, 212, 0);
+}
+
+.formContainer select {
+    font-size: 30px;
+    margin-left: 20px;
+    width: 500px;
+    height: 45px;
+    border-style: none;
+}
+
+.title {
+    position: absolute;
+    justify-content: left;
+    left: 11vw;
+    top: 10vh;
+    font-size: 65px;
+    font-family: cursive;
+}
+
+.buttonHome {
+    margin-right: 80%;
+    margin-top: 1%;
+    border: .1rem solid #FCA652;
+    backdrop-filter: blur(0.2rem);
+    border-radius: 2rem;
+    background-color: white;
+    width: 80px;
+    height: 45px;
+    color: #FCA652;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.9s;
+}
+
+.buttonHome:hover {
+    transform: translateY(-3%);
+    box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
+    transition: all 400ms ease;
+    color: white;
+}
+
+.buttonHome:hover {
+    background-color: #FCA652;
+}
+
+
+.buttonSubmit {
+    margin-left: 58vw;
+    margin-top: 60vh;
+    border: .1rem solid #FCA652;
+    backdrop-filter: blur(0.2rem);
+    border-radius: 2rem;
+    background-color: white;
+    width: 200px;
+    height: 45px;
+    color: #FCA652;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.9s;
+}
+
+.buttonSubmit:hover {
+    transform: translateY(-3%);
+    box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
+    transition: all 400ms ease;
+    color: white;
+}
+
+.buttonSubmit:hover {
+    background-color: #FCA652;
+}

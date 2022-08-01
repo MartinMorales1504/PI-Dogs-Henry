@@ -1,0 +1,48 @@
+.paginado {
+    display: inline-block;
+    padding: 0;
+    margin-top: 10;
+    cursor: pointer;
+    position: relative;
+    
+}
+
+.paginado li {
+    display: inline;
+    
+}
+
+.paginado li a{
+    color: #000000;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color .5s;
+    border: 1px solid #132846bb;
+    margin: 0 2px;
+    font-size: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.paginado li a.active {
+    background-color: #132846c0;
+    color: white;
+    border-radius: 5px;
+}
+
+.paginado li a:hover:not(.active) {
+    background-color: #132846bb;
+    color:white;
+    cursor: pointer;
+}
+
+.paginado li:first-child a {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.paginado li:last-child a {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

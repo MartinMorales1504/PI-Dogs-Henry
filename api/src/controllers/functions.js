@@ -10,17 +10,39 @@ const apiDogs = async () => {
     let avgLifeSpan = null
     let varH = dog.height.metric.split('-')
     let varW = dog.weight.metric.split('-')
+    let varWImperial = dog.weight.imperial.split('–')
     let varLS = dog.life_span.split('-')
     if (varH.length > 1) {
       avgHeight = (parseInt(varH[0]) + parseInt(varH[1])) / 2
     } else {
       avgHeight = parseInt(varH[0])
     }
-    if (varW.length > 1) {
-      avgWeight = (parseInt(varW[0]) + parseInt(varW[1])) / 2
+    if (varW[0] !== 'NaN') {
+      if(varW[0] === 'NaN ') {
+        avgWeight = (parseInt(varW[0]) + parseInt(varW[1])) / 2}
+      if (varW.length > 1) {
+        avgWeight = (parseInt(varW[0]) + parseInt(varW[1])) / 2
+      } else {
+        avgWeight = parseInt(varW[0])
+      }
+    } else if (varWImperial[0] !== 'NaN') {
+      if (varWImperial.length > 1) {
+        avgWeight = (parseInt(varWImperial[0]) + parseInt(varWImperial[1])) / 2 * 0.453592
+      } else {
+        avgWeight = parseInt(varWImperial[0]) * 0.453592
+      }
     } else {
-      avgWeight = parseInt(varW[0])
+      avgWeight = NaN
     }
+    
+    if(dog.id === 232){
+      console.log('metric: ', varW)
+      console.log('typeof varW[0]', typeof varW[0]);
+      console.log('average buscado: ', dog.avgWeight)
+    }
+
+
+
     if (varLS.length > 1) {
       avgLifeSpan = (parseInt(varLS[0]) + parseInt(varLS[1])) / 2
     } else {
@@ -53,15 +75,16 @@ const dbDogs = async () => {
   let dbdogs = dbInfo.map(dog => {
     let temps = dog.temperaments.map(t => t.name).join(', ')
     return {
-    id: dog.id,
-    name: dog.name,
-    average_height: dog.average_height,
-    average_weight: dog.average_weight,
-    average_lifeSpan: dog.average_lifeSpan,
-    temperaments: temps,
-    img: dog.img,
-    createdInDataBase: dog.createdInDataBase
-  }})
+      id: dog.id,
+      name: dog.name,
+      average_height: dog.average_height,
+      average_weight: dog.average_weight,
+      average_lifeSpan: dog.average_lifeSpan,
+      temperaments: temps,
+      img: dog.img,
+      createdInDataBase: dog.createdInDataBase
+    }
+  })
 
   return dbdogs
 }
@@ -75,7 +98,7 @@ const someDogs = async (name) => {
   if (name) {
     let dogs = allD.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
     if (!dogs.length) {
-      return `No existe ningun perro que se llame ${name}`
+      throw new Error(`No existe ningun perro que se llame ${name}`)
     }
     return dogs
   }
@@ -86,33 +109,35 @@ const dogsById = async (id) => {
   const dogs = await allDogs();
   let dog = dogs.find(d => d.id === id)
   if (!dog) {
-    return `No existe ningun perro con id numero ${id}`
+    return (`No existe ningun perro con id ${id}`)
   } else {
     return dog
   }
 }
 
-const createDog = async (id, name, average_height, average_weight, average_lifeSpan, temperaments) => {
+const createDog = async (id, name, average_height, average_weight, average_lifeSpan, temperaments, img) => {
   await findDogTemperament()
   if (!name) {
-    return 'falta agregar nombre, es un dato obligatorio!'
+    throw new Error('falta agregar nombre, es un dato obligatorio!')
   }
   if (!average_height) {
-    return 'falta agregar altura, es un dato obligatorio!'
+    throw new Error('falta agregar altura, es un dato obligatorio!')
   }
   if (!average_weight) {
-    return 'falta agregar peso, es un dato obligatorio!'
+    throw new Error('falta agregar peso, es un dato obligatorio!')
   }
   const obj = {
     id,
     name,
     average_height,
     average_weight,
-    average_lifeSpan
+    average_lifeSpan,
+    img
   }
-  
+
   let newDog = await Dog.create(obj);
-  let toAddTemps = temperaments.split(', ')
+  // let toAddTemps = temperaments.split(', ')
+  toAddTemps = temperaments
   toAddTemps.forEach(async (temp) => {
     let dogTemp = await Temperaments.findAll({
       where: { name: temp }
@@ -136,6 +161,15 @@ const findDogTemperament = async () => {
   }
 
   let dbTemperament = await Temperaments.findAll();
+  dbTemperament = dbTemperament.sort((a, b) => {
+    if (a.name > b.name) {
+      return 1
+    }
+    if (b.name > a.name) {
+      return -1
+    }
+    return 0
+  })
   return dbTemperament
 }
 

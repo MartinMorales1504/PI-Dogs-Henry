@@ -26,26 +26,40 @@ const router = Router();
 
 router.get('/dogs', async (req, res) => {
   const { name } = req.query
-  const dogs = await someDogs(name)
-  res.send(dogs)
+  
+  try {
+    const dogs = await someDogs(name)
+    res.status(200).send(dogs)
+  } catch (error) {
+    res.status(404).send(error.message)
+  }
+
 })
 
 router.get('/dogs/:id', async (req, res) => {
   const { id } = req.params;
-  const dog = await dogsById(id)
-  console.log('perrito', dog)
-  res.send(dog)
+  try {
+    const dog = await dogsById(id)
+    console.log('perrito', dog)
+    res.send(dog)
+  } catch (error) {
+    res.status(404).send(error.message)
+  }
 })
 
 router.post('/dogs', async (req, res) => {
-  const { id, name, average_height, average_weight, average_lifeSpan, temperaments} = req.body;
-  let newDog = await createDog(id, name, average_height, average_weight, average_lifeSpan, temperaments )
-  res.status(201).send(newDog)
+  const { id, name, average_height, average_weight, average_lifeSpan, temperaments, img } = req.body;
+  try {
+    let newDog = await createDog(id, name, average_height, average_weight, average_lifeSpan, temperaments, img )
+    res.status(201).send(newDog)
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
 })
 
 router.get('/temperaments', async (req, res) => {
   let temps = await findDogTemperament()
-  res.send(temps)
+  res.status(200).send(temps)
 })
 
 module.exports = router;

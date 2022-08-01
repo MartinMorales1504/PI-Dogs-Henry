@@ -1,0 +1,17 @@
+.backgr{
+    background-image: url('https://cdn.wamiz.fr/article/images/WAMIZ%20ES/MAYO%202021/varios%20perros%20sentados%20en%20el%20campo.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin-top: -20px;
+    
+}
+
+
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

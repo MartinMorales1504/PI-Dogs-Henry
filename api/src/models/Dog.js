@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
       defaultValue: true
     },
     img: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2000),
       allowNull: true,
       defaultValue: 'https://cdn.shopify.com/s/files/1/0093/8432/9313/articles/Blog_Tieraa_Canina_Huella_perro_1024x1024.jpg?v=1593022994'
     },
