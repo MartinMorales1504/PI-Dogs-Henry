@@ -1,91 +1,101 @@
-*{
+* {
     margin: 0px;
     margin-top: 9px
 }
 
 
-.navBar{
+.navBar {
     background-color: rgba(87, 99, 207, 0.281);
     height: 50px;
 }
 
 .container {
     display: flex;
-    justify-content:flex-end;
-    justify-content:space-between;
+    justify-content: flex-end;
+    justify-content: space-between;
     margin-left: 50px;
     margin-right: 50px;
 }
 
 .searchButton {
     margin-right: 70%;
-    border: .1rem solid #FCA652;
+    border: .1rem solid #C97D20;
     backdrop-filter: blur(0.2rem);
     border-radius: 2rem;
-    background-color: white;
+    background-color: #C97D20;
     width: 80px;
     height: 25px;
-    color: #FCA652;
+    color: white;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.9s; 
+    transition: 0.9s;
 }
 
-.searchButton:hover{
+.searchButton:hover {
     transform: translateY(-3%);
     box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
     transition: all 400ms ease;
-    color: white;
-} 
+    color: #C97D20;
+}
 
-.searchButton:hover{
-    background-color: #FCA652;
+.searchButton:hover {
+    transition: all 500ms;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 4px 4px 8px rgba(243, 243, 243, 0.684);
 }
 
 
 .createButton {
     margin-top: -5px;
-    border: .1rem solid #FCA652;
+    border: .1rem solid #C97D20;
     backdrop-filter: blur(0.2rem);
     border-radius: 2rem;
-    background-color: white;
+    color: white;
+    background-color: #C97D20;
     width: 200px;
     height: 25px;
-    color: #FCA652;
     font-size: 15px;
     cursor: pointer;
     transition: 0.9s;
-    
+
 }
 
-.createButton:hover{
+.createButton:hover {
     transform: translateY(-3%);
     box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
     transition: all 400ms ease;
-    color: white;
-} 
-
-.createButton:hover{
-    background-color: #FCA652;
+    color: #C97D20;
 }
 
-.input{
-    border: .1rem solid #FCA652;
-    border-radius: 2rem;
+.createButton:hover {
+    transition: all 500ms;
     background-color: white;
+    overflow: hidden;
+    box-shadow: 4px 4px 8px rgba(243, 243, 243, 0.684);
+}
+
+.input {
+    border: .1rem solid #C97D20;
+    border-radius: 2rem;
+    background-color: rgba(66, 77, 174, 0);
     margin-left: -20px;
     height: 20px;
     width: 200px;
     color: #FCA652;
+    transition: all 500ms;
 }
 
-.input:hover{
+.input:hover {
     transform: translateY(-3%);
     box-shadow: 0 12px 16px rgba (0, 0, 0, 0.2);
     transition: all 400ms ease;
     color: white;
-} 
+}
 
-.input:hover{
+.input:hover {
+    transition: all 500ms;
     background-color: #FCA652;
+    overflow: hidden;
+    box-shadow: 4px 4px 8px rgba(243, 243, 243, 0.684);
 }

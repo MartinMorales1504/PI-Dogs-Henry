@@ -23,6 +23,7 @@
     margin: 0 2px;
     font-size: 20px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 500ms ease;
 }
 
 .paginado li a.active {
@@ -32,17 +33,10 @@
 }
 
 .paginado li a:hover:not(.active) {
-    background-color: #132846bb;
+    background-color: rgba(45, 34, 146, 0.518);
     color:white;
     cursor: pointer;
+    transform: translateY(-3%);
+    transition: all 500ms ease;
 }
 
-.paginado li:first-child a {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-.paginado li:last-child a {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-}

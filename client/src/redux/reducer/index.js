@@ -67,6 +67,7 @@ function rootReducer(state = initialState, action) {
         tempFilter: action.payload,
         dogs: proFilter(state.createFilter, action.payload)
       }
+      
     // let filteredbyTemp = state.dbApiDogs
     // if (action.payload !== 'ALL') {
     //   filteredbyTemp = filteredbyTemp.filter(dog => {
@@ -81,6 +82,7 @@ function rootReducer(state = initialState, action) {
     //   dogs: filteredbyTemp
     // }
 
+
     // case GET_DOGS_BY_NAME:
     //   let nameFilter = state.dbApiDogs.filter(dog => {
     //     return dog.name.toLowerCase().includes(action.payload.toLowerCase())
@@ -89,6 +91,7 @@ function rootReducer(state = initialState, action) {
     //     ...state,
     //     dogs: nameFilter
     //   }
+
     case GET_DOGS_BY_NAME:
       return {
         ...state,

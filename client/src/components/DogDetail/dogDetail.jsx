@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from "react-router";
@@ -22,8 +23,12 @@ export default function DogDetails(props) {
 
   return (
     <div className={styles.det_backgr}>
-      <img src={dog.img} className={styles.image} />
-      <div className={styles.textContainer}>
+      <Link to='/home'>
+      <button className={styles.homeButton}>Home</button>
+      </Link>
+      
+      <div className={styles.container}>
+        <img src={dog.img} className={styles.image} />
         <h3>{dog.name}</h3>
         <h5>{dog.temperaments}</h5>
         <h5>{dog.average_height} cm</h5>

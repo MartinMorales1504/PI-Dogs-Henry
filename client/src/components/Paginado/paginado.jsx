@@ -8,7 +8,7 @@ export default function Paginado({ dogsPerPage, allDogs, paginado, page}) {
   }
   function thisPage(number){
     if(page === number){
-      return 'active'
+      return styles.active
     }
     return ''
   }

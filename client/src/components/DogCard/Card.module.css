@@ -2,7 +2,6 @@
   background-color: #132846bb;
   /* background: none; */
   width: 220px;
-  
   margin-left: 80px;
   margin-right: 80px;
   margin-bottom: 50px;
@@ -13,8 +12,7 @@
   border-radius: 5%;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.60);
+  transition: all 500ms ease;
 }
 
 
@@ -30,3 +28,27 @@
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.card h5{
+  opacity: 0;
+  color: rgb(243, 243, 243);
+  padding-left: 5px;
+  padding-right: 5px;
+  transition: all 500ms;
+}
+
+.card:hover{
+  transform: translateY(-2%);
+  transition: all 500ms ease;
+  background-color: rgba(10, 4, 67, 0.679);
+  overflow: hidden;
+  box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.60);
+  
+}
+
+.card:hover h5{
+  opacity: 1;
+  transition: all 500ms;
+}
+
+

@@ -38,11 +38,15 @@ export default function Home() {
 
   function handleCreationFilter(event) {
     dispatch(filterByCreation(event.target.value))
-    setPage(1)
+    setTimeout(() => {
+      setPage(1)
+    }, 200)
   }
   function handleTemperamentFilter(event) {
     dispatch(filterByTemps(event.target.value))
-    setPage(1)
+    setTimeout(() => {
+      setPage(1)
+    }, 200)
   }
   // function handleNameInput(event) {
   //   dispatch(getDogsByName(event.target.value))
@@ -50,13 +54,17 @@ export default function Home() {
   function handleAzOrder(event) {
     event.preventDefault()
     dispatch(azOrder(event.target.value))
-    setPage(1)
+    setTimeout(() => {
+      setPage(1)
+    }, 200)
     setOrder(`Ordenado ${event.target.value}`)
   }
   function handleWeightOrder(event) {
     event.preventDefault()
     dispatch(weightOrder(event.target.value))
-    setPage(1)
+    setTimeout(() => {
+      setPage(1)
+    }, 200)
     setOrder(`Ordenado ${event.target.value}`)
   }
   // const nextHandler = () => {
@@ -70,11 +78,8 @@ export default function Home() {
   return (
     <div className={styles.backgr}>
       <Nav />
-      <Link to='/'>
-        <button>volver a LandingPage</button>
-      </Link>
       {/* <input id='nameSearch' onChange={event => handleNameInput(event)} placeholder="Insert dog name"/> */}
-      <div>
+      <div className={styles.filter}>
         {/* ORDEN ALFEBETICO Y POR PESO */}
         <select onChange={event => handleAzOrder(event)}>
           <option value='ascendente'>A-Z</option>
@@ -84,8 +89,6 @@ export default function Home() {
           <option value='pesados'>Mas pesados</option>
           <option value='livianos'>Mas livianos</option>
         </select>
-      </div>
-      <div>
         {/* FILTROS */}
         <select onChange={event => handleCreationFilter(event)}>
           <option value='ALL'>Todos</option>
@@ -100,7 +103,7 @@ export default function Home() {
           ))}
         </select>
       </div>
-            <Paginado
+      <Paginado
         dogsPerPage={dogsPerPage}
         allDogs={allDogs.length}
         paginado={paginado}
@@ -118,7 +121,7 @@ export default function Home() {
             </div>
         }
       </div>
-      
+
     </div>
   )
 }

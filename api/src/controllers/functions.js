@@ -18,14 +18,18 @@ const apiDogs = async () => {
       avgHeight = parseInt(varH[0])
     }
     if (varW[0] !== 'NaN') {
-      if(varW[0] === 'NaN ') {
-        avgWeight = (parseInt(varW[0]) + parseInt(varW[1])) / 2}
       if (varW.length > 1) {
-        avgWeight = (parseInt(varW[0]) + parseInt(varW[1])) / 2
+        if (varW[0] === 'NaN ') {
+          avgWeight = parseInt(varW[1])
+        } else {
+          avgWeight = (parseInt(varW[0]) + parseInt(varW[1])) / 2
+        }
       } else {
         avgWeight = parseInt(varW[0])
       }
-    } else if (varWImperial[0] !== 'NaN') {
+    }
+
+    else if (varWImperial[0] !== 'NaN') {
       if (varWImperial.length > 1) {
         avgWeight = (parseInt(varWImperial[0]) + parseInt(varWImperial[1])) / 2 * 0.453592
       } else {
@@ -34,8 +38,8 @@ const apiDogs = async () => {
     } else {
       avgWeight = NaN
     }
-    
-    if(dog.id === 232){
+
+    if (dog.id === 232) {
       console.log('metric: ', varW)
       console.log('typeof varW[0]', typeof varW[0]);
       console.log('average buscado: ', dog.avgWeight)
@@ -109,7 +113,7 @@ const dogsById = async (id) => {
   const dogs = await allDogs();
   let dog = dogs.find(d => d.id === id)
   if (!dog) {
-    return (`No existe ningun perro con id ${id}`)
+    throw new Error (`No existe ningun perro con id ${id}`)
   } else {
     return dog
   }
@@ -153,7 +157,7 @@ const findDogTemperament = async () => {
   let splittedTemp = temperament.map(d => d.split(', '))
 
 
-  let setTemp = new Set(splittedTemp.flat()) // el set saca los repetidos y el flat los saca del array
+  let setTemp = new Set(splittedTemp.flat()) // el set saca los repetidos y el flat los saca del array interno
   for (element of setTemp) {
     if (element) await Temperaments.findOrCreate({
       where: { name: element }

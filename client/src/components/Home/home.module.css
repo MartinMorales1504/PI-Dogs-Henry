@@ -3,9 +3,10 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
+    width: 100%;
+    height: 100.19vh;
     background-size: cover;
     margin-top: -20px;
-    
 }
 
 
@@ -14,4 +15,31 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.filter select{
+    margin-left: -180px;
+    margin-right: -180px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2rem;
+    background-color: #132846bb;
+    color: white;
+    transition: all 500ms;
+}
+
+.filter select:hover{
+    transition: all 500ms;
+    background-color: rgba(10, 4, 67, 0.679);
+    overflow: hidden;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.60);
+}
+
+.sinPunto{
 }

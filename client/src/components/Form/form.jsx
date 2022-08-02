@@ -19,7 +19,10 @@ function validate(input) {
   }
   else if (input.average_lifeSpan < 1 || input.average_lifeSpan > 20) {
     errors.average_lifeSpan = 'lifespan must be greater than 1 and less than 20'
+  } else if ( input.temperaments.length > 7 ){
+    errors.average_lifeSpan = 'dog must have between 0 and 7 temperaments'
   }
+
 
   return errors
 }
@@ -47,6 +50,7 @@ export default function Form() {
   }, [dispatch])
 
   function handleChange(event) {
+    console.log(input)
     setInput({
       ...input,
       [event.target.name]: event.target.value // target.name nos ayuda a indicar a que parte del estado modifica cada input
@@ -73,21 +77,26 @@ export default function Form() {
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
-    dispatch(createDog(input))
-    // alert("Thanks for caring of your dog!"),
-    setInput({
-      name: '',
-      average_height: '',
-      average_weight: '',
-      average_lifeSpan: '',
-      img: '',
-      temperaments: [],
-    })
-    return setTimeout(() => {
-      history.push('/home')
-    }, 1000)
+    if (Object.keys(errors).length === 0) {
+      console.log('adentro')
+      event.preventDefault();
+      dispatch(createDog(input))
+      alert("Thanks for caring of your dog!");
+      setInput({
+        name: '',
+        average_height: '',
+        average_weight: '',
+        average_lifeSpan: '',
+        img: '',
+        temperaments: [],
+      })
+      return setTimeout(() => {
+        history.push('/home')
+      }, 1000)
+    }
+    alert(errors[Object.keys(errors)[0]])
   }
+
 
   return (
     <div className={styles.backImg}>
@@ -99,31 +108,31 @@ export default function Form() {
         <form>
           <div>
             <label>Name:
-              <input placeholder="dog's name" onChange={(event) => handleChange(event)} type="text" value={input.name} name='name' />
+              <input placeholder="dog's name" onChange={handleChange} type="text" value={input.name} name='name'  />
               {/* {errors.name && (<p className="error">{errors.name}</p>)} */}
             </label>
           </div>
           <div>
             <label>Height:
-              <input placeholder="dog's name" onChange={(event) => handleChange(event)} type="number" value={input.average_height} name='average_height' />
+              <input placeholder="dog's Height" onChange={(event) => handleChange(event)} type="number" value={input.average_height} name='average_height'  />
               {/* {errors.average_height && (<p className="error">{errors.average_height}</p>)} */}
             </label>
           </div>
           <div>
             <label>Weight:
-              <input placeholder="dog's name" onChange={(event) => handleChange(event)} type="number" value={input.average_weight} name='average_weight' />
+              <input placeholder="dog's Weight" onChange={(event) => handleChange(event)} type="number" value={input.average_weight} name='average_weight'  />
               {/* {errors.average_weight && (<p className="error">{errors.average_weight}</p>)} */}
             </label>
           </div>
           <div>
             <label>Lifespan:
-              <input placeholder="dog's name" onChange={(event) => handleChange(event)} type="number" value={input.average_lifeSpan} name='average_lifeSpan' />
+              <input placeholder="dog's LifeSpan" onChange={(event) => handleChange(event)} type="number" value={input.average_lifeSpan} name='average_lifeSpan'  />
               {/* {errors.average_lifeSpan && (<p className="error">{errors.average_lifeSpan}</p>)} */}
             </label>
           </div>
           <div>
             <label>Image:
-              <input placeholder="image link" onChange={(event) => handleChange(event)} type="text" value={input.img} name='img' />
+              <input placeholder="Image link" onChange={(event) => handleChange(event)} type="url" value={input.img} name='img' />
             </label>
           </div>
           <label>Temperaments:
@@ -133,8 +142,8 @@ export default function Form() {
               <option value={temp.name} key={temp.id}>{temp.name}</option>
             ))}
           </select>
-          <ul>
-            {input.temperaments.map(temp => <li key={temp}>{temp} <button onClick={() => handleDelete(temp)}>x</button></li>,)}
+          <ul className={styles.sinPunto}>
+            {input.temperaments.map(temp => <li key={temp}>{temp} <button className={styles.deleteButton} onClick={() => handleDelete(temp)}>X</button></li>,)}
           </ul>
         </form>
       </div>
