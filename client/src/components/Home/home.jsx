@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllDogs, getDogsByName, filterByCreation, getAllTemperaments, filterByTemps, azOrder, weightOrder } from '../../redux/actions';
-import { Link } from 'react-router-dom';
+import { getAllDogs, filterByCreation, getAllTemperaments, filterByTemps, azOrder, weightOrder } from '../../redux/actions';
 import Card from '../DogCard/Card.jsx'
 import Paginado from '../Paginado/paginado.jsx';
 import Nav from '../Nav/nav.jsx';

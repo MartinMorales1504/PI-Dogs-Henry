@@ -18,6 +18,7 @@ export default function Paginado({ dogsPerPage, allDogs, paginado, page}) {
         {pageNumber && pageNumber.map(number =>
         (
           <li key={number}>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a className={thisPage(number)} onClick={() => paginado(number)}>{number}</a>
           </li>
         ))}

@@ -3,7 +3,6 @@ import { Link, useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './form.module.css'
-import TempCard from "../TempCard/tempCard.jsx";
 import { createDog, getAllTemperaments } from '../../redux/actions'
 
 
@@ -19,8 +18,8 @@ function validate(input) {
   }
   else if (input.average_lifeSpan < 1 || input.average_lifeSpan > 20) {
     errors.average_lifeSpan = 'lifespan must be greater than 1 and less than 20'
-  } else if ( input.temperaments.length > 7 ){
-    errors.average_lifeSpan = 'dog must have between 0 and 7 temperaments'
+  } else if (input.temperaments.length > 7) {
+    errors.temperaments = 'dog must have between 0 and 7 temperaments'
   }
 
 
@@ -62,11 +61,12 @@ export default function Form() {
   }
 
   function handleSelect(event) {
+    console.log(event.target.value)
+    if(input.temperaments.includes(event.target.value)) return
     setInput({
       ...input,
       temperaments: [...input.temperaments, event.target.value] // target.name nos ayuda a indicar a que parte del estado modifica cada input
     })
-    console.log(input)
   }
 
   function handleDelete(event) {
@@ -108,25 +108,25 @@ export default function Form() {
         <form>
           <div>
             <label>Name:
-              <input placeholder="dog's name" onChange={handleChange} type="text" value={input.name} name='name'  />
+              <input placeholder="dog's name" onChange={handleChange} type="text" value={input.name} name='name' />
               {/* {errors.name && (<p className="error">{errors.name}</p>)} */}
             </label>
           </div>
           <div>
             <label>Height:
-              <input placeholder="dog's Height" onChange={(event) => handleChange(event)} type="number" value={input.average_height} name='average_height'  />
+              <input placeholder="dog's Height" onChange={(event) => handleChange(event)} type="number" value={input.average_height} name='average_height' />
               {/* {errors.average_height && (<p className="error">{errors.average_height}</p>)} */}
             </label>
           </div>
           <div>
             <label>Weight:
-              <input placeholder="dog's Weight" onChange={(event) => handleChange(event)} type="number" value={input.average_weight} name='average_weight'  />
+              <input placeholder="dog's Weight" onChange={(event) => handleChange(event)} type="number" value={input.average_weight} name='average_weight' />
               {/* {errors.average_weight && (<p className="error">{errors.average_weight}</p>)} */}
             </label>
           </div>
           <div>
             <label>Lifespan:
-              <input placeholder="dog's LifeSpan" onChange={(event) => handleChange(event)} type="number" value={input.average_lifeSpan} name='average_lifeSpan'  />
+              <input placeholder="dog's LifeSpan" onChange={(event) => handleChange(event)} type="number" value={input.average_lifeSpan} name='average_lifeSpan' />
               {/* {errors.average_lifeSpan && (<p className="error">{errors.average_lifeSpan}</p>)} */}
             </label>
           </div>

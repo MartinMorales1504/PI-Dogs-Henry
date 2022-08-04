@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const Dog = require('../models/Dog')
 const Temperaments = require('../models/Temperaments')
-const { someDogs, dogsById, createDog, findDogTemperament} = require('../controllers/functions.js')
+const { someDogs, dogsById, createDog, findDogTemperament } = require('../controllers/functions.js')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -40,7 +40,6 @@ router.get('/dogs/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const dog = await dogsById(id)
-    console.log('perrito', dog)
     res.send(dog)
   } catch (error) {
     res.status(404).send(error.message)

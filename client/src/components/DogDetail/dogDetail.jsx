@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from "react-router";
 import { action_dogDetail } from '../../redux/actions/'
 import styles from './dogDetail.module.css'
 
@@ -18,7 +17,7 @@ export default function DogDetails(props) {
 
   useEffect(() => {
     dispatch(action_dogDetail(id));
-  }, [dispatch])
+  }, [dispatch, id])
 
 
   return (
@@ -28,7 +27,7 @@ export default function DogDetails(props) {
       </Link>
       
       <div className={styles.container}>
-        <img src={dog.img} className={styles.image} />
+        <img src={dog.img} className={styles.image} alt='dog'/>
         <h3>{dog.name}</h3>
         <h5>{dog.temperaments}</h5>
         <h5>{dog.average_height} cm</h5>
@@ -38,4 +37,3 @@ export default function DogDetails(props) {
     </div>
   )
 }
-

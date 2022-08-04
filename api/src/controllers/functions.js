@@ -130,6 +130,9 @@ const createDog = async (id, name, average_height, average_weight, average_lifeS
   if (!average_weight) {
     throw new Error('falta agregar peso, es un dato obligatorio!')
   }
+  if (img === ''){
+    img = undefined
+  }
   const obj = {
     id,
     name,
